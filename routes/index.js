@@ -11,6 +11,7 @@ console.log("MY router got loaded");
 //give homecontroller to browser
 
 router.get('/',homeController.home);
+router.get('/userprofile',homeController.profile);
 
 router.use('/user',require('./users'));
 

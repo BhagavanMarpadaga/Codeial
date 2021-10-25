@@ -1,5 +1,14 @@
 module.exports.home=function(req,res)
 {
-    return res.end('<h1>MY EXPRESS IS UP</h1>');
-    
+    return res.render('home',{
+        title:"home"
+    });
+
 }
+
+module.exports.profile=function(req,res){
+
+    return res.render('user_profile',{});
+}
+
+//module.exports.actionName=functions(req,res){}
