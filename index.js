@@ -2,7 +2,16 @@ const express=require('express');
 
 const app=express();
 const port=8000;
+//use your cookie
 
+const cookieParser=require('cookie-parser');
+//middleware
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
+
+
+
+const db=require('./config/mongoose');
 //import layout library using npm install express-ejs-layouts and add that one here
 const expresslayouts=require('express-ejs-layouts');
 
@@ -11,6 +20,7 @@ app.use(expresslayouts);
 //extract styles and scripts from subpages to layouts other wise style tag added inside body
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
+
 
 
 //use static files
