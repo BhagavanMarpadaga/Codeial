@@ -1,10 +1,13 @@
 const Post=require('../models/posts');
+const Comment=require('../models/comments');
 
 module.exports.post=function(req,res)
 {
+    
     Post.create({   
         content:req.body.content,
-        user:req.user._id
+        user:req.user._id,
+
     },function(err,post)
     {
         if(err)
@@ -14,8 +17,11 @@ module.exports.post=function(req,res)
         }
         else
         {
+            res.locals.post=post;
             return res.redirect('back');
         }
     })
 }
+
+
 

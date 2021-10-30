@@ -1,8 +1,9 @@
 .footer
 {
     width: 100%;
+    position: relative;
     height: 4rem;
-    bottom: 0;
+    margin-top: auto;
     background-color:rgb(80, 78, 78);
     display: flex;
     flex-wrap:wrap;

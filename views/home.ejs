@@ -22,11 +22,29 @@
                         <p>
                             <small>Posted by:<%= i.user.name%></small>
                             <small><%= i.content%></small>
-                        </p>
-                        
-                    <%}%>   
+                            <h3>Commets</h3>
+                            
+                            <div>
+                                <%for(let j of i.comments){%>
+                                    <p>commented by:<%= j.user.name%>&nbsp;Date:<%=j.updatedAt%></br>
+                                    <%=j.content%></p>
+                                <%}%>
 
+                            </div>
+
+                        </p>
+                        <div class="post-comments">
+                            <%if(locals.user){%>
+                                <form action="/comments/create" method="POST">
+                                    <input type="text" name="content" placeholder="Enter comments here">
+                                    <input type="hidden" name="postId" value="<%=i._id%>">
+                                    <input type="submit" value="Submit">
+                                </form>
+                            <%}%>
+                        </div>
+                    <%}%>   
                 </div>
+
             </section>
 
 
