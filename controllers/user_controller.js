@@ -1,17 +1,26 @@
 const User=require('../models/user');
 module.exports.profile=function(req,res)
 {
-    return res.render('user_profile',{});
+    return res.render('user_profile',{ title:"userProfile",
+                                        user:req.user});
 }
 //renders the sign in page
 module.exports.signin=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/user/profile');
+    }
     return res.render('user_sign_in',{title:"Codeial|signin"});
 
 }
 console.log("Inside controller");
 //renders sing up page
 module.exports.signup=function(req,res){
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/user/profile');
+    }
 
     return res.render('user_sign_up',{title:"Codeial|signup"});
 
@@ -21,8 +30,6 @@ module.exports.signup=function(req,res){
 module.exports.create=function(req,res)
 {
     //check pwd and confirm pwd same or not
-    console.log("I am coming here inside create");
-
     if(req.body.password!=req.body.confirmpassword)
     {
         console.log("Pwd doest not matches");
@@ -55,5 +62,12 @@ module.exports.create=function(req,res)
 
 module.exports.createSession=function(req,res)
 {
+    // console.log(req.body);
+    return res.redirect('/');
 
+}
+module.exports.destrotySession=function(req,res)
+{
+    req.logout();
+    return res.redirect('/');
 }

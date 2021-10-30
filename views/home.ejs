@@ -5,10 +5,31 @@
         </title>
     </head>
     <body>
+        <div class="codeial-home">
+            <h1>
+                codial <%=title%>
+            </h1>
+            <section id="feed=posts">
+                <h4>Posts</h4>
+                <form action="/post/create" method="post">
+                    <textarea name="content" id="" cols="30" rows="3" placeholder="Type Post"></textarea>
+                    <input type="submit" value="Post">
+                </form>
+                <div>
+                    <%for(let i of Posts_list){%>
+                        <p>
+                            <small>Posted by:<%= i.user.name%></small>
+                            <small><%= i.content%></small>
+                        </p>
+                        
+                    <%}%>   
+
+                </div>
+            </section>
+
+
+        </div>
         
-        <h1>
-            codial <%=title%>
-        </h1>
         
     </body>
 </html>
