@@ -18,7 +18,8 @@ module.exports.home=function(req,res)
     // })
 
     //to populate the user data we just need to use ponggose populate
-
+    
+    //console.log(locals.user);
     Post.find({}).populate('user').exec(function(err,posts){
 
         if(err)
