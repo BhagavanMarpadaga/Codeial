@@ -1,0 +1,9 @@
+<li>
+    <p><small>
+        <%if(locals.user && ((j.user.id==locals.user.id)||(i.user.id==locals.user.id))){%>
+            <a href="/comments/deleteComment/<%= j._id%>">X</a>
+            <%}%>
+    </small>
+        commented by:<%= j.user.name%>&nbsp;Date:<%=j.updatedAt%></br>
+    <%=j.content%></p>
+</li>

@@ -18,33 +18,15 @@
                 </form>
                 <%}%>
                 <div>
-                    <%for(let i of Posts_list){%>
-                        <p>
-                            <small>Posted by:<%= i.user.name%></small>
-                            <small><%= i.content%></small>
-                            <h3>Commets</h3>
+                    <ul>
+                        <%for(i of Posts_list){%>
+
                             
-                            <div>
-                                <%for(let j of i.comments){%>
-                                    <p>commented by:<%= j.user.name%>&nbsp;Date:<%=j.updatedAt%></br>
-                                    <%=j.content%></p>
-                                <%}%>
+                            <%- include('_posts')%>
 
-                            </div>
-
-                        </p>
-                        <div class="post-comments">
-                            <%if(locals.user){%>
-                                <form action="/comments/create" method="POST">
-                                    <input type="text" name="content" placeholder="Enter comments here">
-                                    <input type="hidden" name="postId" value="<%=i._id%>">
-                                    <input type="submit" value="Submit">
-                                </form>
-                            <%}%>
-                        </div>
-                    <%}%>   
+                        <%}%> 
+                    </ul>
                 </div>
-
             </section>
         </div>
     </body>

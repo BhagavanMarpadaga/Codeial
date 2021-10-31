@@ -7,8 +7,10 @@ module.exports.profile=function(req,res)
 //renders the sign in page
 module.exports.signin=function(req,res)
 {
+   
     if(req.isAuthenticated())
     {
+        
         return res.redirect('/user/profile');
     }
     return res.render('user_sign_in',{title:"Codeial|signin"});
