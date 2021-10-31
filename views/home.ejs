@@ -6,11 +6,8 @@
     </head>
     <body>
         <div class="codeial-home">
-            <h1>
-                codial <%=title%>
-            </h1>
-            <section id="feed=posts">
-                <h4>Posts</h4>
+            <section id="feed-posts">
+                <h3 id="post-heading">Posts</h3>
                 <%if(locals.user){%>
                 <form action="/post/create" method="post">
                     <textarea name="content" id="" cols="30" rows="3" placeholder="Type Post"></textarea>
@@ -20,13 +17,18 @@
                 <div>
                     <ul>
                         <%for(i of Posts_list){%>
-
-                            
                             <%- include('_posts')%>
-
                         <%}%> 
                     </ul>
                 </div>
+            </section>
+            <section id="user-friends">
+                <h3 id="friends-heading">Friends</h3>
+                    <% for(specUser of allusers_list){%>
+                        <div class="specific-friend">
+                            <a href="/user/profile/<%=specUser.id%>"><i class="fas fa-user"></i>&nbsp;<%=specUser.name%></a> 
+                        </div>
+                    <%}%>
             </section>
         </div>
     </body>

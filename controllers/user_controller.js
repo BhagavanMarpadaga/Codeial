@@ -1,8 +1,30 @@
 const User=require('../models/user');
 module.exports.profile=function(req,res)
 {
-    return res.render('user_profile',{ title:"userProfile",
-                                        user:req.user});
+    User.findById(req.params.id,function(err,user)
+    {
+        return res.render('user_profile',{ title:"userProfile",
+                                            user_profile:user
+                        });
+
+    })
+}
+//to update user profile
+module.exports.updateProfile=function(req,res)
+{
+    if(req.user.id==req.params.id)
+    {
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,updatedUser){
+            
+            return res.redirect('back');
+
+        })
+    }
+    else
+    {
+        return res.status(401).send('unauthorized');
+    }
+
 }
 //renders the sign in page
 module.exports.signin=function(req,res)

@@ -1,4 +1,5 @@
 const Post=require('../models/posts');
+const User=require('../models/user');
 
 module.exports.home=function(req,res)
 {
@@ -48,10 +49,14 @@ module.exports.home=function(req,res)
         }
         else
         {
-            return res.render('home',{
-                title:"home",
-                Posts_list:posts
-            });
+            User.find({},function(err,users){
+                return res.render('home',{
+                    title:"home",
+                    Posts_list:posts,
+                    allusers_list:users
+                });
+            })
+
         }
     });
 }

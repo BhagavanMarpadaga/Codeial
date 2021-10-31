@@ -9,7 +9,8 @@ const router=express.Router();
 const userController=require('../controllers/user_controller');
 
 //profile accessable only when the user is signed in
-router.get('/profile',passport.checkAuthentication,userController.profile);
+router.get('/profile/:id',passport.checkAuthentication,userController.profile);
+router.post('/update/:id',userController.updateProfile);
 
 router.get('/sign-in',userController.signin);
 router.get('/sign-up',userController.signup);
