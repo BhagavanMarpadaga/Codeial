@@ -1,56 +1,43 @@
 const Post=require('../models/posts');
 const Comment=require('../models/comments');
 
-module.exports.post=function(req,res)
-{
-    Post.create({   
-        content:req.body.content,
-        user:req.user._id,
+module.exports.post = async function (req, res) {
+    try {
+        let post = await Post.create({
+            content: req.body.content,
+            user: req.user._id,
 
-    },function(err,post)
-    {
-        if(err)
-        {
-            console.log("Error while storing post in db");
-            return;
-        }
-        else
-        {
-            res.locals.post=post;
-            return res.redirect('back');
-        }
-    })
+        });
+        return res.redirect('back');
+
+    } catch (err) {
+        console.log("ERROR", err);
+        return;
+
+    }
+
 }
 
 //destroy a post
-module.exports.destroy=function(req,res)
-{
-    //check whether the post existed in db or not
-    Post.findById(req.params.id,function(err,post){
+module.exports.destroy = async function (req, res) {
+    try {
+        //check whether the post existed in db or not
+        let post = await Post.findById(req.params.id);
 
-        if(err)
-        {
-            console.log("ERROR while searching post in DB");
-            return;
+        //id means converting object into string
+        //Some one else can't authorize to delete my post
+        if (post.user == req.user.id) {
+            post.remove();
+            await Comment.deleteMany({ post: req.params.id })
         }
-        else
-        {
-            //id means converting object into string
-            //Some one else can't authorize to delete my post
-            if(post.user == req.user.id)
-            {
-                post.remove();
-                Comment.deleteMany({post:req.params.id},function(err){
-                    return res.redirect('back');
-                })
-            }
-            else
-            {
-                return res.redirect('back');
-            }
-        }
+        return res.redirect('back');
 
-    })
+    } 
+    catch (err) {
+        console.log("ERROR",err);
+        return;
+    }
+
 }
 
 

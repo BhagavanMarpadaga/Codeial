@@ -11,14 +11,15 @@ const mongoStore=require('connect-mongo');
 const cookieParser=require('cookie-parser');
 const db=require('./config/mongoose');
 const sassmiddleware=require('node-sass-middleware');
+const flash=require('connect-flash');
 //we hve to rite just before the server starts
 
 app.use(sassmiddleware({
-                    src:'./Assets/SCSS',
-                    dest:'./Assets/css',
-                    debug:true,
-                    outputStyle:'extended',
-                    prefix:'/css'
+    src: './Assets/SCSS',
+    dest: './Assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
 
 
 }))
@@ -47,12 +48,12 @@ app.set('view engine','ejs');
 app.set('views','./views');
 //middle ware to encrpt the id
 app.use(session({
-    name:"codeial",
-    secret:'gooddayeveryday',
-    saveUninitialized:false,
-    resave:false,
-    cookie:{
-        maxAge:(1000*60*100)
+    name: "codeial",
+    secret: 'gooddayeveryday',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
     },
     // store: new mongoStore({
     //     mongooseConnection:db,
@@ -63,11 +64,11 @@ app.use(session({
     // }
     // ) 
     store: mongoStore.create({
-        mongoUrl:'mongodb://localhost/codial_devlopment',
-        autoRemove:'disabled'
-      },function(err){
-          console.log(err);
-      })  
+        mongoUrl: 'mongodb://localhost/codial_devlopment',
+        autoRemove: 'disabled'
+    }, function (err) {
+        console.log(err);
+    })
 
 }))
 //tell passport to use session
@@ -76,6 +77,7 @@ app.use(passport.session());
 
 //setup current user usage
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
 app.use('/',require('./routes'));
 
 app.listen(port,function(err){
