@@ -87,11 +87,14 @@ module.exports.create=function(req,res)
 module.exports.createSession=function(req,res)
 {
     // console.log(req.body);
+
+    req.flash('success','logged in successfully');
     return res.redirect('/');
 
 }
 module.exports.destrotySession=function(req,res)
 {
     req.logout();
+    req.flash('success','You have logged out!');
     return res.redirect('/');
 }

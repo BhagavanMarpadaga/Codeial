@@ -12,6 +12,7 @@ const cookieParser=require('cookie-parser');
 const db=require('./config/mongoose');
 const sassmiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
+const custMware=require('./config/middleware');
 //we hve to rite just before the server starts
 
 app.use(sassmiddleware({
@@ -78,6 +79,7 @@ app.use(passport.session());
 //setup current user usage
 app.use(passport.setAuthenticatedUser);
 app.use(flash());
+app.use(custMware.setFlash);
 app.use('/',require('./routes'));
 
 app.listen(port,function(err){

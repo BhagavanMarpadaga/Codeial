@@ -17,12 +17,14 @@ module.exports.comment = async function (req, res) {
             //upadte the value of comment id in the post collection [in comments array]
             postItem.comments.push(newcomment);
             postItem.save();
+            req.flash('success','comment added');
         }
+
         return res.redirect('back');
 
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');
     }
 }
 
@@ -43,12 +45,13 @@ module.exports.destroy = async function (req, res) {
 
                 commentitem.remove();
                 let findpost =await post.findByIdAndUpdate(postid, { $pull: { comments: req.params.id } });
+                req.flash('success','comment deleted');
             }
         }
         return res.redirect('back');
 
     } catch (err) {
-        console.log("ERROR", err);
+        req.flash('error',err);
         return;
     }
 

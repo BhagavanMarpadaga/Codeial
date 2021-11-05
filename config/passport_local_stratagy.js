@@ -5,22 +5,23 @@ const passport=require('passport');
 const LocalStrategy=require('passport-local').Strategy;
 
 //authentication using passport
-
-passport.use(new LocalStrategy({usernameField:'email'},
-             function(email,password,done){
+//To show flash messages we need to add req here
+passport.use(new LocalStrategy({usernameField:'email',
+                                passReqToCallback:true},
+             function(req,email,password,done){
                  //find a user and establish identity
                  User.findOne({email:email},function(err,user)
                  {
 
                     if(err)
                     {
-                        console.log('Error in finding the user',err);
+                        req.flash('error',err);
                         //passes error to passport
                         return done(err);
                     }
                     if(!user||user.password!=password)
                     {
-                        console.log("Invalid user name or password");
+                        req.flash('error','Invalid Username/password');
                         return done(null,false);
                     }
                     return done(null,user);
@@ -72,7 +73,7 @@ passport.checkAuthentication=function(req,res,next)
 
 passport.setAuthenticatedUser=function(req,res,next)
 {
-    console.log("i m i coming here?");
+   
     if(req.isAuthenticated())
     {
         //req.user contains current signed user from the session cookie and we are just 
