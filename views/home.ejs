@@ -1,23 +1,17 @@
-<html>
-    <head>
-        <title>
-            <%=title%>
-        </title>
-    </head>
-    <body>
+<body>
         <div class="codeial-home">
             <section id="feed-posts">
                 <h3 id="post-heading">Posts</h3>
                 <%if(locals.user){%>
-                <form action="/post/create" method="post">
+                <form action="/post/create" method="post" id="new-post-form">
                     <textarea name="content" id="" cols="30" rows="3" placeholder="Type Post"></textarea>
                     <input type="submit" value="Post">
                 </form>
                 <%}%>
-                <div>
-                    <ul>
+                <div  id="post-list-container">
+                    <ul >
                         <%for(i of Posts_list){%>
-                            <%- include('_posts')%>
+                            <%- include('_posts')%>                          
                         <%}%> 
                     </ul>
                 </div>
@@ -32,4 +26,3 @@
             </section>
         </div>
     </body>
-</html>

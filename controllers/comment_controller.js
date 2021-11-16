@@ -17,6 +17,16 @@ module.exports.comment = async function (req, res) {
             //upadte the value of comment id in the post collection [in comments array]
             postItem.comments.push(newcomment);
             postItem.save();
+
+            if(req.xhr)
+            {
+                return res.status(200).json({
+                    data:{
+                        comment:newcomment
+                    },
+                    message:'comment created'
+                })
+            }
             req.flash('success','comment added');
         }
 
@@ -46,6 +56,15 @@ module.exports.destroy = async function (req, res) {
                 commentitem.remove();
                 let findpost =await post.findByIdAndUpdate(postid, { $pull: { comments: req.params.id } });
                 req.flash('success','comment deleted');
+            }
+
+            if(req.xhr)
+            {
+                return res.status(200).json({
+                    data:{
+                        comment_id:req.params.id
+                    }
+                })
             }
         }
         return res.redirect('back');
