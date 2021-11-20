@@ -2,15 +2,19 @@
     <body>
         <div class="user-profile">
             <h1>This is profile page</h1>
+            
 
             <%if(user.id ==user_profile.id){%>
+                <img src="<%=user_profile.avatar%>" alt="<%= user.name%>" width="100">
                 <form action="/user/update/<%=user_profile.id%>" method="POST" enctype="multipart/form-data">
                     <input type="text" name="name" placeholder="Enter your name" value="<%=user_profile.name %>">
                     <input type="email" name="email" placeholder="Enter your email" value="<%=user_profile.email%>">
-                    <input type="file" name="avatar" placeholder="profile picture">
+                    <input type="file" name="avatar" placeholder="profile picture" onchange="getImagePre(event)">
+                    <div id="preview-profile"></div>
                     <input type="submit" value="submit">
                 </form>
             <%}else{%>
+                <img src="<%=user_profile.avatar%>" alt="<%= user.name%>" width="100">
                 <p>name:<%= user_profile.name%></p>
                 <p>email:<%= user_profile.email%></p>
             <%}%>    

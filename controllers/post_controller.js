@@ -20,7 +20,7 @@ module.exports.post = async function (req, res) {
             });
             
         }
-        
+   
         return res.redirect('back');
 
     } catch (err) {
@@ -47,7 +47,7 @@ module.exports.destroy = async function (req, res) {
         {
             return res.status(200).json({
                 data:{post_id:req.params.id},
-                message:'post deleted successfully'
+                message:"post deleted"
             })
         }
         req.flash('success','post deleted!');

@@ -42,6 +42,9 @@ app.set('layout extractScripts',true);
 
 //use static files
 app.use(express.static('./Assets'));
+//use uploads folder
+app.use('/uploads',express.static(__dirname+'/uploads'));
+
 // express router
 
 // set up our views
