@@ -11,7 +11,7 @@ console.log("MY router got loaded");
 
 router.get('/',homeController.home);
 
-
+router.use('/api',require('./api'));
 router.use('/user',require('./users'));
 router.use('/post',require('./post'));
 router.use('/comments',require('./comments'));

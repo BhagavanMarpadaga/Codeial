@@ -6,6 +6,7 @@ const port=8000;
 const session =require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport_local_stratagy');
+const passportJWT=require('./config/passport_jwt_strategy');
 const mongoStore=require('connect-mongo');
 //use your cookie
 const cookieParser=require('cookie-parser');

@@ -1,4 +1,4 @@
-<li id="comments-<% j._id%>">
+<li id="comments-<%= j._id%>">
     <p><small>
         <%if(locals.user && ((j.user.id==locals.user.id)||(i.user.id==locals.user.id))){%>
             <a class="delete-comment-button" href="/comments/deleteComment/<%= j._id%>">X</a>

@@ -8,7 +8,7 @@
                     <%= i.content%>
                 </small>
                 <h3>Comments</h3>
-                <div class="comments-container">
+                <div class="comments-container-<%= i._id%>">
                     <ul>
                         <%for(j of i.comments){%>
                             <%- include('_commets')%>
@@ -21,7 +21,7 @@
             <%if(locals.user){%>
                 <form action="/comments/create" id="new-comment-form" method="POST">
                     <input type="text" name="content" placeholder="Enter comments here">
-                    <input type="hidden" name="postId" value="<%=i._id%>">
+                    <input type="hidden" name="postId" id="postId" value="<%=i._id%>">
                     <input type="submit" value="Submit">
                 </form>
             <%}%>

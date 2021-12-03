@@ -11,7 +11,7 @@ module.exports.post = async function (req, res) {
 
         if(req.xhr)
         {
-            req.flash('success','post published!');
+            
             return res.status(200).json({
                 data:{
                     post:post
@@ -50,7 +50,7 @@ module.exports.destroy = async function (req, res) {
                 message:"post deleted"
             })
         }
-        req.flash('success','post deleted!');
+        
         return res.redirect('back');
 
     } 

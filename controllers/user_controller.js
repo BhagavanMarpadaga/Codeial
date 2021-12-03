@@ -106,6 +106,7 @@ module.exports.updateProfile=async function(req,res)
 //renders the sign in page
 module.exports.signin=function(req,res)
 {
+    
    
     if(req.isAuthenticated())
     {
