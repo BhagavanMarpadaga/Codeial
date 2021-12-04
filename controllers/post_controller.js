@@ -9,12 +9,14 @@ module.exports.post = async function (req, res) {
 
         });
 
+        post= await post.populate('user','name');
         if(req.xhr)
         {
             
             return res.status(200).json({
                 data:{
-                    post:post
+                    post:post,
+                    
                 },
                 message:'post created'
             });

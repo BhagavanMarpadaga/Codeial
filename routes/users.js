@@ -22,7 +22,10 @@ router.post('/create-session',
             passport.authenticate('local',{failureRedirect:'/user/sign-in'},),
             userController.createSession
 );
-
+//when click in sign in with goolge redirects to google page and data fetch from there
+router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+//when google fetches the data it sends it back to me
+router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect:'/user/sign-in'},userController.createSession));
 router.get('/sign-out',userController.destrotySession);
 
 

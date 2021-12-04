@@ -14,6 +14,7 @@
                 data:newpostform.serialize(),
                 success:function(data){
                     console.log(data);
+                    //console.log(data.data.user);
                     let newpost=newPostDom(data.data.post);
                     $('#post-list-container>ul').prepend(newpost);
                     notifypost("post Created");

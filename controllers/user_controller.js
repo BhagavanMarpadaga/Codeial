@@ -106,8 +106,7 @@ module.exports.updateProfile=async function(req,res)
 //renders the sign in page
 module.exports.signin=function(req,res)
 {
-    
-   
+
     if(req.isAuthenticated())
     {
         
@@ -164,9 +163,10 @@ module.exports.create=function(req,res)
 
 module.exports.createSession=function(req,res)
 {
-    // console.log(req.body);
+    //console.log(req.body);
 
-    req.flash('success','logged in successfully');
+  //  req.flash('success','logged in successfully');
+    //return res.redirect('/');
     return res.redirect('/');
 
 }

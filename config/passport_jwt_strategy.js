@@ -20,8 +20,8 @@ passport.use(new JwtStrategy(opts,function(jwt_payload, done){
     User.findById(jwt_payload._id,function(err,user){
         if(err)
         {
-            console.log("Error in jwt authrization",err);
-            return;
+            //console.log("Error in jwt authrization",err);
+            return done(err,false);
         }
         if(user)
         {

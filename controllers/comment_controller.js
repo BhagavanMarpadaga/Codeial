@@ -1,6 +1,6 @@
 const comment=require('../models/comments');
 const post=require('../models/posts');
-
+const commentMailer=require('../mailers/comments_mailer');
 //adding a comment
 module.exports.comment = async function (req, res) {
     try {
@@ -8,7 +8,6 @@ module.exports.comment = async function (req, res) {
         //check post id exist or not 
         console.log(req.body);
         let postItem = await post.findById(req.body.postId);
-
         if (postItem) {
             let newcomment = await comment.create({
                 content: req.body.content,
@@ -18,6 +17,10 @@ module.exports.comment = async function (req, res) {
             //upadte the value of comment id in the post collection [in comments array]
             postItem.comments.push(newcomment);
             postItem.save();
+            newcomment=await newcomment.populate('user','name email');
+          //  console.log(newcomment);
+            commentMailer.newComment(newcomment);
+
 
             if(req.xhr)
             {
