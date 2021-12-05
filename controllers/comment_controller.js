@@ -1,6 +1,8 @@
 const comment=require('../models/comments');
 const post=require('../models/posts');
 const commentMailer=require('../mailers/comments_mailer');
+const queue=require('../config/kue');
+const commentMailWorker=require('../workers/comment-email-workers');
 //adding a comment
 module.exports.comment = async function (req, res) {
     try {
@@ -19,7 +21,15 @@ module.exports.comment = async function (req, res) {
             postItem.save();
             newcomment=await newcomment.populate('user','name email');
           //  console.log(newcomment);
-            commentMailer.newComment(newcomment);
+           // commentMailer.newComment(newcomment);
+           let job=queue.create('emails',newcomment).save(function(err){
+               if(err)
+               {
+                   console.log("Error while queuing the job",err);
+                   return;
+               }
+               console.log("job addeding to queue with id:",job.id);
+           })
 
 
             if(req.xhr)
@@ -42,7 +52,7 @@ module.exports.comment = async function (req, res) {
         return res.redirect('back');
     }
 }
-//adding a comment through ajax request
+//adding a comment through ajax request :it's na r&d ignore
 module.exports.addComment = async function (req, res) {
     try {
 

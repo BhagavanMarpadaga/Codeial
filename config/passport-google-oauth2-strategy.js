@@ -15,7 +15,7 @@ passport.use(new googleStrategy({
         if(err)
         {
             console.log("Error in passport google strategy",err);
-            return;
+            return done(err);
         }
         console.log(profile);
         if(user)
