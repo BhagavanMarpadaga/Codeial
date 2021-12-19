@@ -22,14 +22,16 @@ module.exports.comment = async function (req, res) {
             newcomment=await newcomment.populate('user','name email');
           //  console.log(newcomment);
            // commentMailer.newComment(newcomment);
-           let job=queue.create('emails',newcomment).save(function(err){
-               if(err)
-               {
-                   console.log("Error while queuing the job",err);
-                   return;
-               }
-               console.log("job addeding to queue with id:",job.id);
-           })
+
+           //This code will send a mail to person who added comment
+        //    let job=queue.create('emails',newcomment).save(function(err){
+        //        if(err)
+        //        {
+        //            console.log("Error while queuing the job",err);
+        //            return;
+        //        }
+        //        console.log("job addeding to queue with id:",job.id);
+        //    })
 
 
             if(req.xhr)

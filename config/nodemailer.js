@@ -9,12 +9,13 @@ let transporter = nodemailer.createTransport({
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {  //with which you will send emails
-        user: 'bhagavanmarpadaga@gmail.com', // generated ethereal user
-        pass: 'bhagavan@12345', // generated ethereal password
+        user: '***********', // generated ethereal user
+        pass: '*************', // generated ethereal password
     },
 });
 let renderTemplate = (data, relativePath) => {
     let mailHTML;
+    // console.log("Render Template is callled and data here is",data);
     ejs.renderFile(
         path.join(__dirname, '../views/mailers', relativePath), data, function (err, template) {
             if (err) {

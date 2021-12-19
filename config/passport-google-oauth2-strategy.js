@@ -10,6 +10,7 @@ passport.use(new googleStrategy({
     callbackURL: "http://localhost:8000/user/auth/google/callback"
 
 }, function (accessToken, refreshToken, profile, done) {
+    //console.log(done);
 
     User.findOne({email:profile.emails[0].value}).exec(function(err,user){
         if(err)
@@ -42,3 +43,4 @@ passport.use(new googleStrategy({
     })
 
 }))
+module.exports=passport;

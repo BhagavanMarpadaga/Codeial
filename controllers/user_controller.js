@@ -164,11 +164,11 @@ module.exports.createSession=function(req,res)
 {
 
 
-    console.log("we are insode create session",res);
+  // console.log("we are insode create session",res);
 
   //  req.flash('success','logged in successfully');
     //return res.redirect('/');
-   // return res.redirect('/');
+     return res.redirect('/');
 
 }
 module.exports.destrotySession=function(req,res)

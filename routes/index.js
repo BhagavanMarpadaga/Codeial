@@ -15,5 +15,6 @@ router.use('/api',require('./api'));
 router.use('/user',require('./users'));
 router.use('/post',require('./post'));
 router.use('/comments',require('./comments'));
+router.use('/resetpwd',require('./resetpwd'));
 
 module.exports=router;

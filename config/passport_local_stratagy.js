@@ -79,7 +79,6 @@ passport.setAuthenticatedUser=function(req,res,next)
         //req.user contains current signed user from the session cookie and we are just 
         //sending them to locals for the views
         res.locals.user=req.user;
-        
 
     }
     next();

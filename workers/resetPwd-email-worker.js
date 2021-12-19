@@ -12,6 +12,3 @@ queue.process('emails',function(job,done){
     commentMailer.newComment(job.data);
     
 })
-
-//go to controller and call email worker after adding a comment
-
